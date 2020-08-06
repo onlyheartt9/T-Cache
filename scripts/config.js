@@ -11,8 +11,8 @@ const featureFlags = require('./feature-flags')
 
 const banner =
   '/*!\n' +
-  ` * Vue.js v${version}\n` +
-  ` * (c) 2014-${new Date().getFullYear()} Evan You\n` +
+  ` * TCache.js v${version}\n` +
+  ` * (c) 2020-${new Date().getFullYear()} Challenger\n` +
   ' * Released under the MIT License.\n' +
   ' */'
 
@@ -221,7 +221,7 @@ const builds = {
     //dest: resolve('dist/vue.min.js'),
     
     entry: resolve('src/core/index.js'),
-    dest: resolve('dist/tzz.js'),
+    dest: resolve('dist/index.js'),
     format: 'umd',
     env: 'production',
     alias: { he: './entity-decoder' },
@@ -242,7 +242,7 @@ function genConfig (name) {
       file: opts.dest,
       format: opts.format,
       banner: opts.banner,
-      name: opts.moduleName || 'Vue'
+      name: opts.moduleName || 'TCache'
     },
     onwarn: (msg, warn) => {
       if (!/Circular/.test(msg)) {

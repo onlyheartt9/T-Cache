@@ -1,10 +1,19 @@
-import {getCacheDataFn} from "./cacheData"
-const MOUDULE_NAME = "cacheModelName";
-const fn = getCacheDataFn();
-class TCache {
-  constructor() {
-    this._moduleName = MOUDULE_NAME + this._index++;
-  }
+import {initMixin} from "./init";
+import { initApi } from "./api";
+
+export const MODULE_NAME = "defaultCache";
+
+function TCache(moduleName=MODULE_NAME) {
+    this._init(moduleName);
 }
 
-TCache.prototype._index = 0;
+initMixin(TCache);
+initApi(TCache)
+
+TCache._index = 0;
+TCache._moduleNames =[]; 
+
+
+
+
+export default TCache;

@@ -1,22 +1,28 @@
 {
-  "name": "T-Cache",
-  "description": "A base Cache class",
-  "version": "1.0.0",
-  "author": "",
-  "license": "MIT",
-  "main": "dist/tzz.js",
-  "keywords": [
-    "TCache"
-  ],
+  "name": "@onlyheartt9/t-cache",
+  "version": "1.0.1",
+  "description": "cache",
+  "main": "dist/index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "node scripts/build.js",
+    "upload": "npm publish --access=public",
     "build1": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/onlyheartt9/T-Cache.git"
   },
+  "keywords": [
+    "T-Cache"
+  ],
+  "author": "challenger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onlyheartt9/T-Cache/issues"
+  },
+  "homepage": "https://github.com/onlyheartt9/T-Cache#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.10.5",
