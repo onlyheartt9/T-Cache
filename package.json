@@ -1,6 +1,6 @@
 {
   "name": "@onlyheartt9/t-cache",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "cache",
   "main": "dist/index.common.js",
   "scripts": {
