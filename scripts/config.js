@@ -227,6 +227,13 @@ const builds = {
     alias: { he: './entity-decoder' },
     banner
   },
+  'web-runtime-cjs-prod': {
+        entry: resolve('src/core/index.js'),
+        dest: resolve('dist/index.common.js'),
+        format: 'cjs',
+        env: 'production',
+        banner
+   },
 }
 
 function genConfig (name) {

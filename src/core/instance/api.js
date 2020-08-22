@@ -9,10 +9,10 @@ export function set(name,value=null){
 //获取
 export function get(name){
     let data = this.cacheData[name];
-    if(!this.cacheData.hasOwnProperty(name)){
-        throw new Error("not have attribute:"+name)
-    }
-    return data;
+    // if(!this.cacheData.hasOwnProperty(name)){
+    //     throw new Error("not have attribute:"+name)
+    // }
+    return data?data:null;
 }
 //删除指定属性
 export function remove(name){
@@ -24,6 +24,10 @@ export function reset(){
         delete this.cacheData[key];
     })
 }
+//获取所有key值
+export function getKeys(){
+   return Object.keys(this.cacheData)
+}
 
 
 export function initApi(TCache){
@@ -33,6 +37,7 @@ export function initApi(TCache){
         get,
         remove,
         reset,
+        getKeys
     }
     Object.keys(api).forEach(key=>{
         TCache.prototype[key] = api[key];

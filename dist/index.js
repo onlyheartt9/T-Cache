@@ -1,5 +1,5 @@
 /*!
- * TCache.js v1.0.0
+ * TCache.js v1.0.3
  * (c) 2020-2020 Challenger
  * Released under the MIT License.
  */
@@ -10,7 +10,6 @@
 }(this, (function () { 'use strict';
 
     var cache = Object.create(null);
-    window.ttt = cache;
     function getCacheData(moduleName){
         if(!cache[moduleName]){
             cache[moduleName] = {};
@@ -44,10 +43,10 @@
     //获取
     function get(name){
         var data = this.cacheData[name];
-        if(!this.cacheData.hasOwnProperty(name)){
-            throw new Error("not have attribute:"+name)
-        }
-        return data;
+        // if(!this.cacheData.hasOwnProperty(name)){
+        //     throw new Error("not have attribute:"+name)
+        // }
+        return data?data:null;
     }
     //删除指定属性
     function remove(name){
@@ -61,6 +60,10 @@
             delete this$1.cacheData[key];
         });
     }
+    //获取所有key值
+    function getKeys(){
+       return Object.keys(this.cacheData)
+    }
 
 
     function initApi(TCache){
@@ -70,6 +73,7 @@
             get: get,
             remove: remove,
             reset: reset,
+            getKeys: getKeys
         };
         Object.keys(api).forEach(function (key){
             TCache.prototype[key] = api[key];
@@ -91,7 +95,7 @@
     TCache._moduleNames =[];
 
     // Window.TCache = TCache;
-    TCache.version = '1.0.0';
+    TCache.version = '1.0.3';
 
     return TCache;
 
