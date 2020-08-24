@@ -1,6 +1,9 @@
 {
-  "presets": [
-    ["env", { "modules": false }],
-    "stage-3"
-  ]
+  "presets": [["@babel/preset-env", { "modules": false }]],
+  "plugins": ["@babel/plugin-proposal-optional-chaining"],
+  "env": {
+    "test": {
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
+    }
+  }
 }

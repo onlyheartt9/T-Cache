@@ -1,96 +1,89 @@
 /*!
- * TCache.js v1.0.3
+ * TCache.js v1.0.6
  * (c) 2020-2020 Challenger
  * Released under the MIT License.
  */
 'use strict';
 
 var cache = Object.create(null);
-function getCacheData(moduleName){
-    if(!cache[moduleName]){
-        cache[moduleName] = {};
-    }
-    return cache[moduleName]
+function getCacheData(moduleName) {
+  if (!cache[moduleName]) {
+    cache[moduleName] = {};
+  }
+
+  return cache[moduleName];
 }
 
-function initMixin(TCache){
-    TCache.prototype._init=function(moduleName){
-        //设置模块名
-        this._moduleName = moduleName;
-        TCache._moduleNames.push(moduleName);
+function initMixin(TCache) {
+  TCache.prototype._init = function (moduleName) {
+    //设置模块名
+    this._moduleName = moduleName;
 
-        //获取模块对应缓存对象
-        this.cacheData = getCacheData(moduleName);
-    };
+    TCache._moduleNames.push(moduleName); //获取模块对应缓存对象
+
+
+    this.cacheData = getCacheData(moduleName);
+  };
 }
 
 //添加
-function add(name,value){
-    if ( value === void 0 ) value=null;
+function add(name) {
+  var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  this.cacheData[name] = value;
+} //设置
 
-    this.cacheData[name] = value;
-}
-//设置
-function set(name,value){
-    if ( value === void 0 ) value=null;
+function set(name) {
+  var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  this.cacheData[name] = value;
+} //获取
 
-    this.cacheData[name] = value;
-}
-//获取
-function get(name){
-    var data = this.cacheData[name];
-    // if(!this.cacheData.hasOwnProperty(name)){
-    //     throw new Error("not have attribute:"+name)
-    // }
-    return data?data:null;
-}
-//删除指定属性
-function remove(name){
-    delete this.cacheData[name];
-}
-//重置所有属性
-function reset(){
-    var this$1 = this;
+function get(name) {
+  var data = this.cacheData[name]; // if(!this.cacheData.hasOwnProperty(name)){
+  //     throw new Error("not have attribute:"+name)
+  // }
 
-    Object.keys(this.cacheData).forEach(function (key){
-        delete this$1.cacheData[key];
-    });
-}
-//获取所有key值
-function getKeys(){
-   return Object.keys(this.cacheData)
-}
+  return data ? data : null;
+} //删除指定属性
 
+function remove(name) {
+  delete this.cacheData[name];
+} //重置所有属性
 
-function initApi(TCache){
-    var api  = {
-        add: add,
-        set: set,
-        get: get,
-        remove: remove,
-        reset: reset,
-        getKeys: getKeys
-    };
-    Object.keys(api).forEach(function (key){
-        TCache.prototype[key] = api[key];
-    });
+function reset() {
+  var _this = this;
+
+  Object.keys(this.cacheData).forEach(function (key) {
+    delete _this.cacheData[key];
+  });
+} //获取所有key值
+
+function getKeys() {
+  return Object.keys(this.cacheData);
+}
+function initApi(TCache) {
+  var api = {
+    add: add,
+    set: set,
+    get: get,
+    remove: remove,
+    reset: reset,
+    getKeys: getKeys
+  };
+  Object.keys(api).forEach(function (key) {
+    TCache.prototype[key] = api[key];
+  });
 }
 
 var MODULE_NAME = "defaultCache";
 
-function TCache(moduleName) {
-    if ( moduleName === void 0 ) moduleName=MODULE_NAME;
+function TCache() {
+  var moduleName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : MODULE_NAME;
 
-    this._init(moduleName);
+  this._init(moduleName);
 }
-
 initMixin(TCache);
 initApi(TCache);
-
 TCache._index = 0;
-TCache._moduleNames =[];
-
-// Window.TCache = TCache;
-TCache.version = '1.0.3';
+TCache._moduleNames = [];
 
 module.exports = TCache;
